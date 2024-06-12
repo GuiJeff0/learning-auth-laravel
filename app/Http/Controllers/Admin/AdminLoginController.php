@@ -18,19 +18,18 @@ class AdminLoginController extends Controller
         try {
             // Validação das Credenciais
             $credentials = $request->validate([
-                'email' => ['required', 'email'],
+                'email' => ['bail', 'required', 'email'],
                 'password' => ['required'],
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Retorna erro de validação
-            return redirect()->route('admin.login')
-                ->withErrors($e->errors())
-                ->withInput();
+            return redirect()->route('admin.login');
         }
     
         try {
             // Tentativa de Autenticação
             if(Auth::attempt(array_merge($credentials, ['role' => 'admin']))) {
+                $request->session()->regenarate();
                 return redirect()->intended('admin/dashboard');
             } else {
                 session()->flash('error', 'Invalid Credentials');
@@ -42,5 +41,18 @@ class AdminLoginController extends Controller
             return redirect()->route('admin.login');
         }
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/admin/login');
+    }
+
+
+
+
     
 }
