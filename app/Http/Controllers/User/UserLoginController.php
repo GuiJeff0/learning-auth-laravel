@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class UserLoginController extends Controller
 {
     public function index(){
-        return view('login');
+        return view('user.login');
     }
 
 

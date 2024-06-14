@@ -1,17 +1,25 @@
-@extends('layout');
+@extends('layout')
+@section('content')
 
 <body>
     <main class="form-signin w-100 m-auto">
-        <form action="{{ route('check') }}" method="POST">
+        <h1>Sign Up</h1>
+
+        <form action="{{ route('signup') }}" method="POST">
             {!! csrf_field() !!} 
             <div class="root">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <label for="inputName" class="form-label">Full Name</label>
+                    <input type="email" class="form-control" id="name" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <label for="inputPassword" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password">
                 </div>
                 <div class="mb-3 form-check">
@@ -26,3 +34,4 @@
 </body>
 
 </html>
+@stop
