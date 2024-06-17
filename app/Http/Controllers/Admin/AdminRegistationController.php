@@ -21,6 +21,6 @@ class AdminRegistationController extends Controller
             'role' => 'admin',
         ]);
 
-        return view('admin.thank');
+        return view('layout');
     }
 }

@@ -15,13 +15,13 @@ class UserRegistationController extends Controller
 
     public function store(Request $request){
         $input = $request->all();
-        $user = User::create([
+        User::create([
             "name"=> $input["name"],
             "email"=> $input["email"],
             "password"=> bcrypt($input["password"]),
             'role' => 'user',
         ]);
 
-        return view('user.thank');
+        return view('layout');
     }
 }
